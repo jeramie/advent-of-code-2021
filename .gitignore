@@ -1,0 +1,10 @@
+*/.vs/**
+*/bin/**
+*/obj/**
+/packages
+/AzureFunctions/local.settings.json
+*/*app_offline.htm
+Horticulture.Data.Core/packages/**
+/DropboxDownloader/packages/**
+/DropboxDownloader/DropboxDownloader/bin/Debug
+/DropboxDownloader/DropboxDownloader/obj/Debug
