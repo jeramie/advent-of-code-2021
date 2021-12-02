@@ -91,7 +91,7 @@ void ChallengeTwo()
 {
     var inputs = File.ReadAllLines(@"input.txt").Select(int.Parse).ToList();
 
-    Console.WriteLine($"Increases for sliding window {inputs.Where((_, idx) => idx + 2 < inputs.Count).Select((input, idx) => new[] { input, inputs[idx + 1], inputs[idx + 2] }.Sum()).Where((next, idx) => idx > 0 && next > new[] { inputs[idx - 1], inputs[idx], inputs[idx + 1] }.Sum()).Count()}");
+    Console.WriteLine($"Increases for sliding window {inputs.Where((_, idx) => idx + 2 < inputs.Count).Where((next, idx) => idx > 0 && new[] { next, inputs[idx + 1], inputs[idx + 2] }.Sum() > new[] { inputs[idx - 1], next, inputs[idx + 1] }.Sum()).Count()}");
 }
 
 ChallengeOne();
