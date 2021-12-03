@@ -80,19 +80,10 @@ Your puzzle answer was 1737.
  
  */
 
-void ChallengeOne()
-{
-    var inputs = File.ReadAllLines(@"input.txt").Select(int.Parse).ToList();
+var inputs = File.ReadAllLines(@"input.txt").Select(int.Parse).ToList();
 
-    Console.WriteLine($"Increases for linear {inputs.Select((input, idx) => idx == 0 || input <= inputs[idx - 1] ? 0 : 1).Sum()}");
-}
+//challenge 1
+Console.WriteLine($"Increases for linear {inputs.Where((input, idx) => idx > 0 && input > inputs[idx - 1]).Count()}");
 
-void ChallengeTwo()
-{
-    var inputs = File.ReadAllLines(@"input.txt").Select(int.Parse).ToList();
-
-    Console.WriteLine($"Increases for sliding window {inputs.Where((_, idx) => idx + 2 < inputs.Count).Where((next, idx) => idx > 0 && new[] { next, inputs[idx + 1], inputs[idx + 2] }.Sum() > new[] { inputs[idx - 1], next, inputs[idx + 1] }.Sum()).Count()}");
-}
-
-ChallengeOne();
-ChallengeTwo();
+//challenge 2
+Console.WriteLine($"Increases for sliding window {inputs.Where((_, idx) => idx > 0 && idx + 2 < inputs.Count && inputs.GetRange(idx, 3).Sum() > inputs.GetRange(idx - 1, 3).Sum()).Count()}");
