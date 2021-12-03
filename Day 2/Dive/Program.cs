@@ -1,5 +1,4 @@
-﻿/*
----Day 2: Dive!-- -
+﻿/*---Day 2: Dive!---
 Now, you need to figure out how to pilot this thing.
 
 It seems like the submarine can take a series of commands like forward 1, down 2, or up 3:
@@ -58,50 +57,44 @@ Using this new interpretation of the commands, calculate the horizontal position
 Your puzzle answer was 1857958050.
 */
 
-void ChallengeOne() {
-    int horizontal = 0, vertical = 0;
+var inputs = File.ReadAllLines(@"input.txt").Select(line => line.Split(' ') switch { var a => (Direction: a[0], Amount: int.Parse(a[1])) }).ToList();
 
-    File.ReadAllLines(@"input.txt").ToList().ForEach(input =>
+
+//challenge 1
+var (horizontal, vertical) = inputs.Aggregate((Horizontal: 0, Vertical: 0), (total, next) =>
+{
+    var (direction, amount) = next;
+
+    if (direction == "forward")
     {
-        var parts = input.Split(' ');
-        var amount = int.Parse(parts[1]);
-
-        switch (parts[0])
-        {
-            case "forward":
-                horizontal += amount;
-                break;
-            default:
-                vertical += parts[0] == "up" ? -amount : amount;
-                break;
-        }
-    });
-
-    Console.WriteLine($"Final Position: h:{horizontal} v:{vertical}, product: {horizontal * vertical}");
-}
-
-void ChallengeTwo() {
-    int horizontal = 0, vertical = 0, aim = 0;
-
-    File.ReadAllLines(@"input.txt").ToList().ForEach(input =>
+        total.Horizontal += amount;
+    }
+    else
     {
-        var parts = input.Split(' ');
-        var amount = int.Parse(parts[1]);
+        total.Vertical += direction == "up" ? -amount : amount;
+    }
 
-        switch (parts[0])
-        {
-            case "forward":
-                horizontal += amount;
-                vertical += aim * amount;
-                break;
-            default:
-                aim += parts[0] == "up" ? -amount : amount;
-                break;
-        }
-    });
+    return total;
+});
 
-    Console.WriteLine($"Final Position: h:{horizontal} v:{vertical}, product: {horizontal * vertical}");
-}
+Console.WriteLine($"Final Product {horizontal * vertical}");
 
-ChallengeOne();
-ChallengeTwo();
+//challenge 2
+var (horizontal1, vertical1, _) = inputs.Aggregate((Horizontal: 0, Vertical: 0, Aim: 0), (total, next) =>
+{
+    var (direction, amount) = next;
+
+    if (direction == "forward")
+    {
+        total.Horizontal += amount;
+        total.Vertical += total.Aim * amount;
+    }
+    else
+    {
+        total.Aim += direction == "up" ? -amount : amount;
+    }
+
+    return total;
+});
+
+Console.WriteLine($"Final Product {horizontal1 * vertical1}");
