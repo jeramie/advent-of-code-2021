@@ -9,15 +9,16 @@ echo "Submarine power consumption: $((2#$gamma * 2#$(echo $gamma | tr 01 10)))"
 while read -r line; do inputs+=("$line"); done < input.txt
 
 find_rating() {
+    common=$1
+    shift
     arr=("$@")
     for ((i = 0; i < ${#counts[@]}; i++))
     do
         if [ ${#arr[@]} -gt 1 ]
         then
-            bit=0
-            for l in ${arr[@]}; do (( ${l:$i:1} )) && (( bit += ${l:$i:1} )); done
-            bit=$((bit >= (${#arr[@]} + 2 -1) / 2 ? $1 : (1 - $1)))
-            arr=( $( for r in ${arr[@]} ; do echo $r ; done | egrep "^.{$i}$bit" ) )
+            total=0
+            for l in ${arr[@]}; do (( total += ${l:$i:1} )); done
+            arr=( $( for r in ${arr[@]} ; do echo $r ; done | egrep "^.{$i}$((total >= (${#arr[@]} + 2 -1) / 2 ? $common : (1 - $common)))" ) )
         fi
     done
     echo "${arr[0]}"
