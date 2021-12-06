@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarSweep", "Day 1\SonarSweep\SonarSweep.csproj", "{3111E999-11E9-472E-819F-39BB5F8BD9A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarSweep", "Day 1\SonarSweep.csproj", "{3111E999-11E9-472E-819F-39BB5F8BD9A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 1", "Day 1", "{907037EB-FBA6-42E6-A472-64E70256CB83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 2", "Day 2", "{3CCA43CA-A127-4DD0-A449-8AC40BE90DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dive", "Day 2\Dive\Dive.csproj", "{8C70BCB1-E9AD-4C97-A522-533371653CC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dive", "Day 2\Dive.csproj", "{8C70BCB1-E9AD-4C97-A522-533371653CC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
