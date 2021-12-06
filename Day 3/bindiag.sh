@@ -3,8 +3,8 @@
 while read -r line; do inputs+=("$line"); done < input.txt
 
 # challenge 1
-for line in inputs do for((i=0; i < ${#line}; i++)); do (( counts[$i]+=${line:$i:1} )); done done
-for((i=0; i < ${#counts[@]}; i++)) do gamma+="$(( counts[$i] > $(( total / 2 )) ? 1 : 0))"; done
+for line in ${inputs[@]}; do for((i = 0; i < ${#line}; i++)) do (( counts[$i] += ${line:$i:1} )); done done
+for ((i = 0; i < ${#counts[@]}; i++)) do gamma+="$(( counts[$i] > (${#inputs[@]} + 2 - 1) / 2 ? 1 : 0))"; done
 echo "Submarine power consumption: $((2#$gamma * 2#$(echo $gamma | tr 01 10)))"
 
 # challenge 2
