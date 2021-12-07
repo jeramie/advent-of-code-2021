@@ -9,7 +9,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 1", "Day 1", "{907037EB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 2", "Day 2", "{3CCA43CA-A127-4DD0-A449-8AC40BE90DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dive", "Day 2\Dive.csproj", "{8C70BCB1-E9AD-4C97-A522-533371653CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dive", "Day 2\Dive.csproj", "{8C70BCB1-E9AD-4C97-A522-533371653CC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 3", "Day 3", "{21DEFBCD-2DC2-45FF-AB9E-D94E410F214F}"
+	ProjectSection(SolutionItems) = preProject
+		Day 3\bindiag.sh = Day 3\bindiag.sh
+		Day 3\input.txt = Day 3\input.txt
+		Day 3\README.md = Day 3\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Day 4", "Day 4", "{2D1150F3-7F43-4A51-A7A4-D6544B9D34EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
