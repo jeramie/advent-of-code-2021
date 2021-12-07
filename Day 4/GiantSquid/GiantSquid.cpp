@@ -23,7 +23,7 @@ std::vector<unsigned> bingo_calls;
 
 int main()
 {
-	std::ifstream input; input.open("input.txt");
+	std::ifstream input{ "input.txt" };
 	std::string line;
 	bool header = true;
 	while (std::getline(input, line))
