@@ -1,6 +1,7 @@
 #include <bitset>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -20,6 +21,8 @@ std::bitset<25> bingo_win_masks[10] = {
 
 std::vector<std::vector<unsigned>> bingo_cards;
 std::vector<unsigned> bingo_calls;
+std::vector<unsigned> winning_cards;
+std::map<int, int> winning_values;
 
 int main()
 {
@@ -70,6 +73,8 @@ int main()
 	{
 		for (unsigned i = 0; i < bingo_cards.size(); i++)
 		{
+			if (winning_values[i] > 0) continue;
+
 			std::vector<unsigned>& bingo_card = bingo_cards[i];
 
 			auto itr = std::find(bingo_card.begin(), bingo_card.end(), num);
@@ -94,15 +99,19 @@ int main()
 							}
 						}
 
-						//sum all unmarked values in this card
-						std::cout << "The total of unmarked numbers in the winning card by the last number called is: " << total * num;
-
-						return 1;
+						winning_cards.push_back(i);
+						winning_values[i] = total * num;
 					}
 				}
 			}
 		}
 	}
+
+	//part 1
+	std::cout << "The first winning board value is: " << winning_values[winning_cards.front()] << "\n";
+
+	//part 2
+	std::cout << "The last winning board value is: " << winning_values[winning_cards.back()] << "\n";
 }
 
 
