@@ -73,12 +73,11 @@ int main()
 	{
 		for (unsigned i = 0; i < bingo_cards.size(); i++)
 		{
-			if (winning_values[i] > 0) continue;
+			if (winning_values.contains(i)) continue;
 
 			std::vector<unsigned>& bingo_card = bingo_cards[i];
 
-			auto itr = std::find(bingo_card.begin(), bingo_card.end(), num);
-			if (itr != bingo_card.cend())
+			if (auto itr = std::ranges::find(bingo_card, num); itr != bingo_card.cend())
 			{
 				std::bitset<25>& marked_numbers = bingo_card_marked_numbers[i];
 
