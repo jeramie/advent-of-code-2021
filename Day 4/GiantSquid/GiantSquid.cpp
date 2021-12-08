@@ -22,7 +22,7 @@ std::bitset<25> bingo_win_masks[10] = {
 std::vector<std::vector<unsigned>> bingo_cards;
 std::vector<unsigned> bingo_calls;
 std::vector<unsigned> winning_cards;
-std::map<int, int> winning_values;
+std::map<unsigned, unsigned> winning_values;
 
 int main()
 {
