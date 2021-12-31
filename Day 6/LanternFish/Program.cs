@@ -1,7 +1,9 @@
-﻿static long GetCountOfFish(int days)
+﻿const int MAX_LIFE = 9;
+
+static long GetCountOfFish(int days)
 {
     var fish = File.ReadAllLines(@"input.txt").SelectMany(input => input.Split(',').Select(int.Parse)).GroupBy(f => f)
-        .Aggregate(new List<long>(new long[9]), (list, kv) =>
+        .Aggregate(new List<long>(new long[MAX_LIFE]), (list, kv) =>
             {
                 list[kv.Key] = kv.Count();
                 return list;
@@ -14,10 +16,10 @@
         //shift array to decrement each fishes life
         fish.RemoveAt(0);
 
-        //expired fish are reset to life of 6 days
+        //expired fish are reset to life of 7 (6) days
         fish[6] += expired;
 
-        //each expired fish creates a new fish with life of 8 days
+        //each expired fish creates a new fish with life of 9 (8) days
         fish.Add(expired);
     }
 
