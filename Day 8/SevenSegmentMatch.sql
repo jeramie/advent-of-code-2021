@@ -1,5 +1,12 @@
-DECLARE @key_table TABLE (num int, data varchar(7), length int);
+CREATE TYPE SegmentTableType AS TABLE (num int, data varchar(7), length int) 
 
+GO 
+
+DECLARE @key_table SegmentTableType
+DECLARE @input SegmentTableType
+DECLARE @output SegmentTableType
+
+--seed data
 INSERT INTO @key_table VALUES
 (0, 'abcefg', LEN('abcefg')), 
 (1, 'cf', LEN('cf')),
@@ -10,9 +17,6 @@ INSERT INTO @key_table VALUES
 (6, 'abdefg', LEN('abdefg')),
 (7, 'acf', LEN('acf')),
 (8, 'abcdefg', LEN('abcdefg'))
-
-DECLARE @input TABLE (id int, data varchar(7), length int)
-DECLARE @output TABLE (id int, data varchar(7), length int)
 
 INSERT INTO @input VALUES
  (1, 'aedcg', LEN('aedcg')), (1, 'db', LEN('db')), (1, 'ecbdgf', LEN('ecbdgf')), (1, 'badfegc', LEN('badfegc')), (1, 'abfcde', LEN('abfcde')), (1, 'edb', LEN('edb')), (1, 'cbgfe', LEN('cbgfe')), (1, 'bfdg', LEN('bfdg')), (1, 'bdgec', LEN('bdgec')), (1, 'agfbce', LEN('agfbce')),
@@ -63,8 +67,7 @@ INSERT INTO @input VALUES
  (46, 'fegbac', LEN('fegbac')), (46, 'bgaed', LEN('bgaed')), (46, 'gacd', LEN('gacd')), (46, 'cegadbf', LEN('cegadbf')), (46, 'dg', LEN('dg')), (46, 'acbge', LEN('acbge')), (46, 'dge', LEN('dge')), (46, 'fdbea', LEN('fdbea')), (46, 'dgbfec', LEN('dgbfec')), (46, 'cbdage', LEN('cbdage')),
  (47, 'gdcfe', LEN('gdcfe')), (47, 'debgcf', LEN('debgcf')), (47, 'bc', LEN('bc')), (47, 'gcb', LEN('gcb')), (47, 'dfcgb', LEN('dfcgb')), (47, 'gbafd', LEN('gbafd')), (47, 'eacgfd', LEN('eacgfd')), (47, 'acebdfg', LEN('acebdfg')), (47, 'edcb', LEN('edcb')), (47, 'begafc', LEN('begafc')),
  (48, 'gfbc', LEN('gfbc')), (48, 'gb', LEN('gb')), (48, 'gcabd', LEN('gcabd')), (48, 'eagfcd', LEN('eagfcd')), (48, 'dfgca', LEN('dfgca')), (48, 'fcdbag', LEN('fcdbag')), (48, 'eadbc', LEN('eadbc')), (48, 'gba', LEN('gba')), (48, 'fdgeba', LEN('fdgeba')), (48, 'dgbface', LEN('dgbface')),
- (49, 'edabfc', LEN('edabfc')), (49, 'cagbf', LEN('cagbf')), (49, 'cb', LEN('cb')), (49, 'acgfbe', LEN('acgfbe')), (49, 'bfc', LEN('bfc')), (49, 'facgde', LEN('facgde')), (49, 'agdfb', LEN('agdfb')), (49, 'bceg', LEN('bceg')), (49, 'bacdgfe', LEN('bacdgfe')), (49, 'fegca', LEN('fegca'))
-  INSERT INTO @input VALUES
+ (49, 'edabfc', LEN('edabfc')), (49, 'cagbf', LEN('cagbf')), (49, 'cb', LEN('cb')), (49, 'acgfbe', LEN('acgfbe')), (49, 'bfc', LEN('bfc')), (49, 'facgde', LEN('facgde')), (49, 'agdfb', LEN('agdfb')), (49, 'bceg', LEN('bceg')), (49, 'bacdgfe', LEN('bacdgfe')), (49, 'fegca', LEN('fegca')),
  (50, 'aecbd', LEN('aecbd')), (50, 'gecba', LEN('gecba')), (50, 'fecdab', LEN('fecdab')), (50, 'acfd', LEN('acfd')), (50, 'fgbade', LEN('fgbade')), (50, 'ebcdf', LEN('ebcdf')), (50, 'da', LEN('da')), (50, 'egcdabf', LEN('egcdabf')), (50, 'fdbgec', LEN('fdbgec')), (50, 'abd', LEN('abd')),
  (51, 'egbdc', LEN('egbdc')), (51, 'dfaceg', LEN('dfaceg')), (51, 'dfbcg', LEN('dfbcg')), (51, 'gbeacd', LEN('gbeacd')), (51, 'fgc', LEN('fgc')), (51, 'gbcfaed', LEN('gbcfaed')), (51, 'fdgba', LEN('fdgba')), (51, 'gbecfd', LEN('gbecfd')), (51, 'bcfe', LEN('bcfe')), (51, 'fc', LEN('fc')),
  (52, 'decgfba', LEN('decgfba')), (52, 'adfe', LEN('adfe')), (52, 'agf', LEN('agf')), (52, 'fgadbc', LEN('fgadbc')), (52, 'gcdefa', LEN('gcdefa')), (52, 'eacgf', LEN('eacgf')), (52, 'gceda', LEN('gceda')), (52, 'fbgce', LEN('fbgce')), (52, 'fa', LEN('fa')), (52, 'cbdega', LEN('cbdega')),
@@ -114,10 +117,11 @@ INSERT INTO @input VALUES
  (96, 'adeb', LEN('adeb')), (96, 'edagf', LEN('edagf')), (96, 'fegab', LEN('fegab')), (96, 'eb', LEN('eb')), (96, 'bef', LEN('bef')), (96, 'dagcfe', LEN('dagcfe')), (96, 'afgbc', LEN('afgbc')), (96, 'cgebdf', LEN('cgebdf')), (96, 'fdegba', LEN('fdegba')), (96, 'cfeadgb', LEN('cfeadgb')),
  (97, 'ecfbg', LEN('ecfbg')), (97, 'gbad', LEN('gbad')), (97, 'bacdef', LEN('bacdef')), (97, 'bd', LEN('bd')), (97, 'begcd', LEN('begcd')), (97, 'dcaefg', LEN('dcaefg')), (97, 'daegcb', LEN('daegcb')), (97, 'dbc', LEN('dbc')), (97, 'dgbafec', LEN('dgbafec')), (97, 'aegdc', LEN('aegdc')),
  (98, 'efcdg', LEN('efcdg')), (98, 'deb', LEN('deb')), (98, 'fbdec', LEN('fbdec')), (98, 'dgebca', LEN('dgebca')), (98, 'afecb', LEN('afecb')), (98, 'db', LEN('db')), (98, 'edagbfc', LEN('edagbfc')), (98, 'abecgf', LEN('abecgf')), (98, 'badf', LEN('badf')), (98, 'cbefda', LEN('cbefda')),
- (99, 'edbaf', LEN('edbaf')), (99, 'gf', LEN('gf')), (99, 'egfa', LEN('egfa')), (99, 'efabgd', LEN('efabgd')), (99, 'fbg', LEN('fbg')), (99, 'bfdaec', LEN('bfdaec')), (99, 'egdfbac', LEN('egdfbac')), (99, 'dcgab', LEN('dcgab')), (99, 'dabfg', LEN('dabfg')), (99, 'cbdfge', LEN('cbdfge'))
- 
-  INSERT INTO @input VALUES
- (100, 'cfegd', LEN('cfegd')), (100, 'aef', LEN('aef')), (100, 'bacgf', LEN('bacgf')), (100, 'dfacegb', LEN('dfacegb')), (100, 'cbfeda', LEN('cbfeda')), (100, 'ea', LEN('ea')), (100, 'cdgfba', LEN('cdgfba')), (100, 'afgceb', LEN('afgceb')), (100, 'gabe', LEN('gabe')), (100, 'gcefa', LEN('gcefa')),
+ (99, 'edbaf', LEN('edbaf')), (99, 'gf', LEN('gf')), (99, 'egfa', LEN('egfa')), (99, 'efabgd', LEN('efabgd')), (99, 'fbg', LEN('fbg')), (99, 'bfdaec', LEN('bfdaec')), (99, 'egdfbac', LEN('egdfbac')), (99, 'dcgab', LEN('dcgab')), (99, 'dabfg', LEN('dabfg')), (99, 'cbdfge', LEN('cbdfge')),
+ (100, 'cfegd', LEN('cfegd')), (100, 'aef', LEN('aef')), (100, 'bacgf', LEN('bacgf')), (100, 'dfacegb', LEN('dfacegb')), (100, 'cbfeda', LEN('cbfeda')), (100, 'ea', LEN('ea')), (100, 'cdgfba', LEN('cdgfba')), (100, 'afgceb', LEN('afgceb')), (100, 'gabe', LEN('gabe')), (100, 'gcefa', LEN('gcefa'))
+
+ INSERT INTO @input VALUES
+
  (101, 'dacbf', LEN('dacbf')), (101, 'cbgfd', LEN('cbgfd')), (101, 'fbecad', LEN('fbecad')), (101, 'edab', LEN('edab')), (101, 'ab', LEN('ab')), (101, 'gdecaf', LEN('gdecaf')), (101, 'cba', LEN('cba')), (101, 'fegbca', LEN('fegbca')), (101, 'decfa', LEN('decfa')), (101, 'afgbedc', LEN('afgbedc')),
  (102, 'bcgdef', LEN('bcgdef')), (102, 'ecfbag', LEN('ecfbag')), (102, 'bc', LEN('bc')), (102, 'cfdae', LEN('cfdae')), (102, 'ecb', LEN('ecb')), (102, 'becaf', LEN('becaf')), (102, 'gbac', LEN('gbac')), (102, 'bdgeaf', LEN('bdgeaf')), (102, 'egbdacf', LEN('egbdacf')), (102, 'agbef', LEN('agbef')),
  (103, 'ebcfg', LEN('ebcfg')), (103, 'dabegc', LEN('dabegc')), (103, 'fbdca', LEN('fbdca')), (103, 'dafecb', LEN('dafecb')), (103, 'cgbafd', LEN('cgbafd')), (103, 'edaf', LEN('edaf')), (103, 'acbfe', LEN('acbfe')), (103, 'eab', LEN('eab')), (103, 'ae', LEN('ae')), (103, 'bdecfag', LEN('bdecfag')),
@@ -166,9 +170,7 @@ INSERT INTO @input VALUES
  (146, 'ecgbdf', LEN('ecgbdf')), (146, 'debga', LEN('debga')), (146, 'cbegd', LEN('cbegd')), (146, 'bgcfdea', LEN('bgcfdea')), (146, 'aeg', LEN('aeg')), (146, 'deafgc', LEN('deafgc')), (146, 'dfgab', LEN('dfgab')), (146, 'cabe', LEN('cabe')), (146, 'ea', LEN('ea')), (146, 'gcabed', LEN('gcabed')),
  (147, 'dbcgf', LEN('dbcgf')), (147, 'cfgeab', LEN('cfgeab')), (147, 'afedcgb', LEN('afedcgb')), (147, 'cgabd', LEN('cgabd')), (147, 'ad', LEN('ad')), (147, 'fgdeba', LEN('fgdeba')), (147, 'bad', LEN('bad')), (147, 'adec', LEN('adec')), (147, 'ecbag', LEN('ecbag')), (147, 'edgcab', LEN('edgcab')),
  (148, 'bdeacf', LEN('bdeacf')), (148, 'acf', LEN('acf')), (148, 'cfebdga', LEN('cfebdga')), (148, 'abfdg', LEN('abfdg')), (148, 'dcfe', LEN('dcfe')), (148, 'fabcge', LEN('fabcge')), (148, 'cf', LEN('cf')), (148, 'abcdge', LEN('abcdge')), (148, 'facdb', LEN('facdb')), (148, 'ecdba', LEN('ecdba')),
- (149, 'bdfaeg', LEN('bdfaeg')), (149, 'gbdafec', LEN('gbdafec')), (149, 'becad', LEN('becad')), (149, 'gebf', LEN('gebf')), (149, 'fcaegd', LEN('fcaegd')), (149, 'feagd', LEN('feagd')), (149, 'bedfa', LEN('bedfa')), (149, 'fcdagb', LEN('fcdagb')), (149, 'dfb', LEN('dfb')), (149, 'fb', LEN('fb'))
- 
-  INSERT INTO @input VALUES
+ (149, 'bdfaeg', LEN('bdfaeg')), (149, 'gbdafec', LEN('gbdafec')), (149, 'becad', LEN('becad')), (149, 'gebf', LEN('gebf')), (149, 'fcaegd', LEN('fcaegd')), (149, 'feagd', LEN('feagd')), (149, 'bedfa', LEN('bedfa')), (149, 'fcdagb', LEN('fcdagb')), (149, 'dfb', LEN('dfb')), (149, 'fb', LEN('fb')),
  (150, 'aegcd', LEN('aegcd')), (150, 'gefab', LEN('gefab')), (150, 'gfadcb', LEN('gfadcb')), (150, 'dbegcfa', LEN('dbegcfa')), (150, 'fgeacb', LEN('fgeacb')), (150, 'db', LEN('db')), (150, 'bgd', LEN('bgd')), (150, 'bagde', LEN('bagde')), (150, 'bedf', LEN('bedf')), (150, 'agfdbe', LEN('agfdbe')),
  (151, 'cea', LEN('cea')), (151, 'cagf', LEN('cagf')), (151, 'befca', LEN('befca')), (151, 'gefacdb', LEN('gefacdb')), (151, 'gdaceb', LEN('gdaceb')), (151, 'febdag', LEN('febdag')), (151, 'ecdbf', LEN('ecdbf')), (151, 'ceagfb', LEN('ceagfb')), (151, 'ca', LEN('ca')), (151, 'febga', LEN('febga')),
  (152, 'eabcdf', LEN('eabcdf')), (152, 'dagfc', LEN('dagfc')), (152, 'fegdbac', LEN('fegdbac')), (152, 'acgedb', LEN('acgedb')), (152, 'dae', LEN('dae')), (152, 'ed', LEN('ed')), (152, 'geacb', LEN('geacb')), (152, 'edgb', LEN('edgb')), (152, 'adecg', LEN('adecg')), (152, 'efcgab', LEN('efcgab')),
@@ -426,3 +428,5 @@ INSERT INTO @output VALUES
 
 
 SELECT COUNT(*) FROM @output o INNER JOIN @key_table k ON k.length = o.length AND k.num IN (1,4,7,8)
+
+DROP TYPE SegmentTableType
