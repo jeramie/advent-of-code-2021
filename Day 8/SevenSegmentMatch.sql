@@ -1,20 +1,20 @@
-DECLARE @key_table TABLE (num int, length int);
+DECLARE @key_table TABLE (num int, data varchar(7), length int);
 
 INSERT INTO @key_table VALUES
-(0, 6), --abcefg
-(1, 2), --cf
-(2, 5), --acdeg
-(3, 5), --acdfg
-(4, 4), --bcdf
-(5, 5), --abdfg
-(6, 6), --abdefg
-(7, 3), --acf
-(8, 7) --abcdefg
+(0, 'abcefg', LEN('abcefg')), 
+(1, 'cf', LEN('cf')),
+(2, 'acdeg', LEN('acdeg')),
+(3, 'acdfg', LEN('acdfg')),
+(4, 'bcdf', LEN('bcdf')),
+(5, 'abdfg', LEN('abdfg')),
+(6, 'abdefg', LEN('abdefg')),
+(7, 'acf', LEN('acf')),
+(8, 'abcdefg', LEN('abcdefg'))
 
-DECLARE @input TABLE (id int, data varchar(9), length int)
-DECLARE @output TABLE (id int, data varchar(9), length int)
+DECLARE @input TABLE (id int, data varchar(7), length int)
+DECLARE @output TABLE (id int, data varchar(7), length int)
 
-  INSERT INTO @input VALUES
+INSERT INTO @input VALUES
  (1, 'aedcg', LEN('aedcg')), (1, 'db', LEN('db')), (1, 'ecbdgf', LEN('ecbdgf')), (1, 'badfegc', LEN('badfegc')), (1, 'abfcde', LEN('abfcde')), (1, 'edb', LEN('edb')), (1, 'cbgfe', LEN('cbgfe')), (1, 'bfdg', LEN('bfdg')), (1, 'bdgec', LEN('bdgec')), (1, 'agfbce', LEN('agfbce')),
  (2, 'bgeadf', LEN('bgeadf')), (2, 'egcbda', LEN('egcbda')), (2, 'cfebg', LEN('cfebg')), (2, 'ac', LEN('ac')), (2, 'caefbdg', LEN('caefbdg')), (2, 'bacd', LEN('bacd')), (2, 'ecfgad', LEN('ecfgad')), (2, 'cabeg', LEN('cabeg')), (2, 'gca', LEN('gca')), (2, 'abgde', LEN('abgde')),
  (3, 'cbfge', LEN('cbfge')), (3, 'ed', LEN('ed')), (3, 'aegbcd', LEN('aegbcd')), (3, 'gfdba', LEN('gfdba')), (3, 'aedf', LEN('aedf')), (3, 'facbdge', LEN('facbdge')), (3, 'fdegba', LEN('fdegba')), (3, 'bfgcda', LEN('bfgcda')), (3, 'befdg', LEN('befdg')), (3, 'dge', LEN('dge')),
